@@ -11,12 +11,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 
-public class HelloWorldSender {
+public class TestQueueSender {
 	public static void main(String args[]) throws Exception {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring/spring-config.xml");
 		JmsTemplate jmsTemplate = (JmsTemplate) context.getBean("jmsTemplate");
-		Destination destination = (Destination) context.getBean("destination");
-		for(int i=0; i<100; i++){
+		Destination destination = (Destination) context.getBean("testQueue");
+		for(int i=0; i<10; i++){
 			jmsTemplate.send(destination, new MessageCreator() {
 				public Message createMessage(Session session) throws JMSException {
 					return session.createTextMessage("大家好这个是测试！");

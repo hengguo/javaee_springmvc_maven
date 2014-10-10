@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,8 @@ import demo.util.JsonUtil;
 @Controller
 @RequestMapping(value="/user")
 public class UserController {
+	
+	private Logger LOG = Logger.getLogger(UserController.class);
 	
 	@Resource
 	private UserService userService;
@@ -48,7 +51,9 @@ public class UserController {
 	@RequestMapping(value="/getDynamicUsers")
 	@ResponseBody
 	public String getDynamicUsers(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		LOG.info("getDynamicUsers 进来了");
 		List<Map<String, Object>> users =userService.selectUsers(new HashMap<Object, Object>());
+		LOG.info("getDynamicUsers要出去了");
 		return JsonUtil.writeListToDataGrid(users.size(), users);
 	}
 	

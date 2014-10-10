@@ -30,7 +30,7 @@
 			}
 		});
 
-		fetchData(myNj);
+// 		fetchData(myNj);
 	});
 
 	function fetchData(nj) {
@@ -65,7 +65,7 @@
 		});
 
 		$('#disgrid').datagrid(options);
-		$('#disgrid').datagrid('reload');
+// 		$('#disgrid').datagrid('reload');
 
 	};
 
