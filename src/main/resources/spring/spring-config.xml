@@ -8,21 +8,22 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
   
-<!--   <context:annotation-config /> -->
+  <context:annotation-config />
     
    <!-- 扫描注解Bean -->
   <context:component-scan base-package="demo">
-    <context:exclude-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect" />
+<!--     <context:exclude-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect" /> -->
+    <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
   </context:component-scan>
-  
-   
+
+
   <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="location">
       <value>classpath:config.properties</value>
     </property>
   </bean>
-  
-  <import resource="classpath*:/spring/mq-message.xml"/>
+
+  <import resource="classpath*:/spring/mq-message.xml" />
 
   <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
     <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
@@ -114,5 +115,5 @@
 <!--   </aop:config> -->
 
   <bean id="flightService" class="demo.service.impl.FlightServiceImpl"></bean>
-  
+
 </beans>
