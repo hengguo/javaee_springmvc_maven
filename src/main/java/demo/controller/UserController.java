@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import demo.domain.User;
 import demo.service.UserService;
+import demo.util.AESAPPUtils;
 import demo.util.JsonUtil;
 
 @Controller
@@ -52,6 +53,9 @@ public class UserController {
 	@ResponseBody
 	public String getDynamicUsers(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		LOG.info("getDynamicUsers 进来了");
+		Map<String, Object> map = (Map<String, Object>) request.getAttribute("SPRING");
+
+        System.out.println("recive message:\t"+map);
 		List<Map<String, Object>> users =userService.selectUsers(new HashMap<Object, Object>());
 		LOG.info("getDynamicUsers要出去了");
 		return JsonUtil.writeListToDataGrid(users.size(), users);

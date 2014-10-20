@@ -1,5 +1,8 @@
 package demo.aspect;
 
+import java.lang.reflect.Method;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,9 +17,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import demo.util.AESAPPUtils;
+import demo.util.GzipAESUtil;
+import demo.util.JsonUtil;
+
 @Aspect
 @Component
 public class AspectDemo {
+
+	private static final String APP_MESSAGE_KEY = "SPRING";
 
 	Logger LOG = Logger.getLogger(AspectDemo.class);
 
@@ -34,29 +43,42 @@ public class AspectDemo {
 	@Around("exeTest()")
 	public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
 		LOG.info("我进来 了");
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
-				.getRequestAttributes()).getRequest();
-
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		String methodName = joinPoint.getSignature().getName();
 		LOG.info("拦截到路径: " + request.getRequestURL());
 
+		String parameter = request.getParameter(APP_MESSAGE_KEY);
+		
+        String recive = AESAPPUtils.decryptAES(parameter);
+        
+        Map<String, Object> map = JsonUtil.jsonStringToMap(recive);
+        System.out.println(map);
+        
+        request.setAttribute("SPRING", map);
+        
 		Object target = joinPoint.getTarget();
 		Object[] args = joinPoint.getArgs();
+		Class []cls = new Class[args.length];
 		HttpServletRequest in = null;
 		HttpServletResponse out = null;
-		for (int i = 0; i < args.length; i++) {
+		for(int i=0; i< args.length; i++){
 			if (args[i] instanceof HttpServletRequest) {
 				in = (HttpServletRequest) args[i];
+				cls[i] = HttpServletRequest.class;
 			} else if (args[i] instanceof HttpServletResponse) {
 				out = (HttpServletResponse) args[i];
+				cls[i] = HttpServletResponse.class;
 			}
 		}
-		// return request;
-		LOG.info(in.getParameter("nj"));
+		Method method = joinPoint.getSignature().getDeclaringType().getMethod(methodName, cls);
+//		LOG.info(in.getParameter("nj"));
+//		JSONObject obj = JSONObject.fromObject( joinPoint.proceed());
+		Object o = method.invoke(target, args);
+		
 		LOG.info("我要出去了");
-		JSONObject obj = JSONObject.fromObject( joinPoint.proceed());
-		LOG.info(obj.get("total"));
-
-		return obj.toString();
+		String enString = GzipAESUtil.compressThenEncryptAES(o.toString());
+//		LOG.info("加密后数据 "+);
+		return enString;
 
 	}
 }
