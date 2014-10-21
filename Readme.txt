@@ -4,5 +4,3 @@
 	EasyUI
 	mybatis
 	Active MQ
-	ttttttttttttttttttttttttttttttttttttttt
-
