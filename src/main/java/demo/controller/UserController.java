@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import demo.domain.User;
 import demo.service.UserService;
-import demo.util.AESAPPUtils;
 import demo.util.JsonUtil;
 
 @Controller
@@ -26,7 +25,12 @@ import demo.util.JsonUtil;
 public class UserController {
 	
 	private Logger LOG = Logger.getLogger(UserController.class);
-	
+	private static int ctn = 0;
+
+	public UserController() {
+		System.out.println("UserController ctn = " + ctn);
+		UserController.ctn++;
+	}
 	@Resource
 	private UserService userService;
 	
@@ -61,4 +65,11 @@ public class UserController {
 		return JsonUtil.writeListToDataGrid(users.size(), users);
 	}
 	
+	@RequestMapping(value="/nullReturn", produces = "text/plain;charset=UTF-8")
+	public void nullReturn(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		Map<String, Object> map = (Map<String, Object>) request.getAttribute("SPRING");
+
+        System.out.println("recive message:\t"+map);
+		List<Map<String, Object>> users =userService.selectUsers(new HashMap<Object, Object>());
+	}
 }

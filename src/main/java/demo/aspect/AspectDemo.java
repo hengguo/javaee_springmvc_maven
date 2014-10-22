@@ -36,7 +36,7 @@ public class AspectDemo {
 		AspectDemo.ctn++;
 	}
 
-	@Pointcut("execution(* demo.controller.UserController.getDynamicUsers(..))")
+	@Pointcut("execution(* demo.controller.UserController.*(..))")
 	public void exeTest() {
 	}
 
@@ -70,14 +70,13 @@ public class AspectDemo {
 				cls[i] = HttpServletResponse.class;
 			}
 		}
-		Method method = joinPoint.getSignature().getDeclaringType().getMethod(methodName, cls);
-//		LOG.info(in.getParameter("nj"));
-//		JSONObject obj = JSONObject.fromObject( joinPoint.proceed());
-		Object o = method.invoke(target, args);
+//		Method method = joinPoint.getSignature().getDeclaringTypeName().getDeclaringType().getMethod(methodName, cls);
+//		Class<?> rType = method.getReturnType();
+		Object o = joinPoint.proceed();
+//		Object o = method.invoke(target, args);
 		
 		LOG.info("我要出去了");
-		String enString = GzipAESUtil.compressThenEncryptAES(o.toString());
-//		LOG.info("加密后数据 "+);
+		String enString = GzipAESUtil.compressThenEncryptAES((String)o);
 		return enString;
 
 	}

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
+import demo.controller.UserController;
 import demo.domain.User;
 import demo.mapper.UserMapper;
 import demo.service.UserService;
@@ -14,7 +15,12 @@ import demo.service.UserService;
 @Component("userService")
 public class UserServiceImpl implements UserService {
 
-	
+	private static int ctn = 0;
+
+	public UserServiceImpl() {
+		System.out.println("UserServiceImpl ctn = " + ctn);
+		UserServiceImpl.ctn++;
+	}
 	@Resource
 	private UserMapper userDao;
 	@Override

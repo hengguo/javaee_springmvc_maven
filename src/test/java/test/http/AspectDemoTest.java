@@ -24,7 +24,7 @@ public class AspectDemoTest {
     
     @Test
     public void appSync(){
-        String pre = "user/getDynamicUsers";
+        String pre = "user/nullReturn";
         String url = "http://localhost:8090/springmvc_maven/" + pre;
         JSONObject jo = new JSONObject();
         jo.put("A", "aaa");

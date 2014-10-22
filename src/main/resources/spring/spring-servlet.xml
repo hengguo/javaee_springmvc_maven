@@ -14,7 +14,7 @@
        	http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
-<!--   <context:annotation-config /> -->
+  <context:annotation-config />
   <aop:aspectj-autoproxy proxy-target-class="true" />
        <!-- 把标记了@Controller注解的类转换为bean -->
   <mvc:annotation-driven />
@@ -23,7 +23,7 @@
   -->
      <!-- 开启controller注解支持   -->
   <context:component-scan base-package="demo.controller">
-    <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 <!--     <context:exclude-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/> -->
 <!--     <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" /> -->
 <!--     <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Component" /> -->

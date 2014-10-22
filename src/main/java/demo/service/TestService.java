@@ -2,7 +2,7 @@ package demo.service;
 
 import org.springframework.stereotype.Service;
 
-@Service("Test")  
+@Service("testService")  
 public class TestService {  
   
     private static int cnt = 0;  
