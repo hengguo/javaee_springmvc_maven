@@ -36,7 +36,7 @@ public class AspectDemo {
 		AspectDemo.ctn++;
 	}
 
-	@Pointcut("execution(* demo.controller.UserController.*(..))")
+	@Pointcut("execution(* demo.controller.UserController.XXXXX(..))")
 	public void exeTest() {
 	}
 
@@ -48,13 +48,14 @@ public class AspectDemo {
 		LOG.info("拦截到路径: " + request.getRequestURL());
 
 		String parameter = request.getParameter(APP_MESSAGE_KEY);
-		
-        String recive = AESAPPUtils.decryptAES(parameter);
-        
-        Map<String, Object> map = JsonUtil.jsonStringToMap(recive);
-        System.out.println(map);
-        
-        request.setAttribute("SPRING", map);
+		if(parameter != null){
+			String recive = AESAPPUtils.decryptAES(parameter);
+			
+			Map<String, Object> map = JsonUtil.jsonStringToMap(recive);
+			System.out.println(map);
+			
+			request.setAttribute("SPRING", map);
+		}
         
 		Object target = joinPoint.getTarget();
 		Object[] args = joinPoint.getArgs();

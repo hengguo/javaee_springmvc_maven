@@ -47,8 +47,7 @@
   </servlet-mapping>
 
   <welcome-file-list>
-    <welcome-file>
-      WEB-INF/jsp/main.jsp
-    </welcome-file>
-  </welcome-file-list>
+		<welcome-file>/index/main</welcome-file>
+	</welcome-file-list>
+
 </web-app>

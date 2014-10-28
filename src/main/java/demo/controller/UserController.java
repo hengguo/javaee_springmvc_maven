@@ -53,11 +53,12 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping(value="/getDynamicUsers")
+	@RequestMapping(value="/getDynamicUsers", produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String getDynamicUsers(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		LOG.info("getDynamicUsers 进来了");
 		Map<String, Object> map = (Map<String, Object>) request.getAttribute("SPRING");
+		System.out.println(1/0);
 
         System.out.println("recive message:\t"+map);
 		List<Map<String, Object>> users =userService.selectUsers(new HashMap<Object, Object>());
