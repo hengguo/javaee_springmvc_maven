@@ -47,8 +47,6 @@
 	<mvc:resources mapping="/js/**" location="/WEB-INF/js/" />
 
 	<!-- json view -->
-	<bean id="defaultJsonView"
-		class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
 		p:order="0" />
@@ -63,6 +61,8 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<bean id="defaultJsonView"
+		class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 
 	<!-- 全局异常配置 start -->
 	<bean id="exceptionResolver"

@@ -39,6 +39,15 @@ public class UserController {
 		return "dynamicDataGridColumn";
 	}
 	
+	@RequestMapping("editableDatagridView")
+	public String editableDatagridView(){
+		return "editableDataGridColumn";
+	}
+	@RequestMapping("editableDatagridView2")
+	public String editableDatagridView2(){
+		return "editableDataGridColumn2";
+	}
+	
 	@RequestMapping(value="/getUsers")
 	public ModelAndView getUsers(HttpServletRequest request, HttpServletResponse response){
 		List<User> users = new ArrayList<User>();
@@ -58,7 +67,7 @@ public class UserController {
 	public String getDynamicUsers(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		LOG.info("getDynamicUsers 进来了");
 		Map<String, Object> map = (Map<String, Object>) request.getAttribute("SPRING");
-		System.out.println(1/0);
+		//System.out.println(1/0);
 
         System.out.println("recive message:\t"+map);
 		List<Map<String, Object>> users =userService.selectUsers(new HashMap<Object, Object>());
