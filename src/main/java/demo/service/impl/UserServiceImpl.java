@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<Map<String, Object>> selectUsers(Map map) {
+	public List<User> selectUsers(Map map) {
 		return userDao.selectUsers(map);
 	}
 

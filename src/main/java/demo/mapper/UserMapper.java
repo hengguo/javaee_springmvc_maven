@@ -13,6 +13,6 @@ public interface UserMapper {
 	public User selectUser(Long id);
 	public User selectUser(Map<Object, Object> map);
 	public User selectUserGroup(Long id);
-	public List<Map<String, Object>> selectUsers(Map map);
+	public List<User> selectUsers(Map map);
 
 }

@@ -10,6 +10,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import demo.domain.User;
 import demo.service.UserService;
+import demo.util.JsonHelper;
 import demo.util.JsonUtil;
 
 @Controller
@@ -47,7 +50,10 @@ public class UserController {
 	public String editableDatagridView2(){
 		return "editableDataGridColumn2";
 	}
-	
+	@RequestMapping("footerDataGridView")
+	public String footerDataGridView(){
+		return "footerDataGrid";
+	}
 	@RequestMapping(value="/getUsers")
 	public ModelAndView getUsers(HttpServletRequest request, HttpServletResponse response){
 		List<User> users = new ArrayList<User>();
@@ -70,9 +76,25 @@ public class UserController {
 		//System.out.println(1/0);
 
         System.out.println("recive message:\t"+map);
-		List<Map<String, Object>> users =userService.selectUsers(new HashMap<Object, Object>());
+		List<User> users =userService.selectUsers(new HashMap<Object, Object>());
 		LOG.info("getDynamicUsers要出去了");
-		return JsonUtil.writeListToDataGrid(users.size(), users);
+		return JsonUtil.writeListOBJToDataGrid(users.size(), users);
+	}
+	
+	@RequestMapping(value="/getFooter", produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String getFooter(HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+		List<User> users =userService.selectUsers(new HashMap<Object, Object>());
+		JSONObject object = new JSONObject();
+		object.put("total", users.size());
+    	object.put("rows", JsonHelper.getJsonString4Object(JsonUtil.toGJson(users), "yyyy-MM-dd HH:mm:ss"));
+    	float totalPrice = 0;
+    	for(User user : users){
+    		totalPrice += user.getId();
+    	}
+		object.put("footer", "[{\"name\":\"总计（元）：\",\"password\":" + totalPrice + "}]");
+		return object.toString();
 	}
 	
 	@RequestMapping(value="/nullReturn", produces = "text/plain;charset=UTF-8")
@@ -80,6 +102,6 @@ public class UserController {
 		Map<String, Object> map = (Map<String, Object>) request.getAttribute("SPRING");
 
         System.out.println("recive message:\t"+map);
-		List<Map<String, Object>> users =userService.selectUsers(new HashMap<Object, Object>());
+		List<User> users =userService.selectUsers(new HashMap<Object, Object>());
 	}
 }

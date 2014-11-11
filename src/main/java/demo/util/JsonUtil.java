@@ -75,6 +75,13 @@ public final class JsonUtil {
     	object.put("rows", JsonHelper.getJsonString4Object(toGJson(list), "yyyy-MM-dd HH:mm:ss"));
         return object.toString();
     }
+    
+    public static String writeListOBJToDataGrid(int listCount, Object obj) throws Exception {
+    	JSONObject object = new JSONObject();
+    	object.put("total", listCount);
+    	object.put("rows", JsonHelper.getJsonString4Object(toGJson(obj), "yyyy-MM-dd HH:mm:ss"));
+        return object.toString();
+    }
 
     /**
      * @param o
