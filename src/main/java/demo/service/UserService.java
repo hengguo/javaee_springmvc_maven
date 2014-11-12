@@ -11,4 +11,6 @@ public interface UserService {
 	public User selectUserGroup(Long id);
 	
 	public List<User> selectUsers(Map map);
+	
+	public void deleteAndInsert(User user);
 }

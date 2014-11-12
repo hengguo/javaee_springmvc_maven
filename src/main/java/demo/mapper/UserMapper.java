@@ -14,5 +14,8 @@ public interface UserMapper {
 	public User selectUser(Map<Object, Object> map);
 	public User selectUserGroup(Long id);
 	public List<User> selectUsers(Map map);
+	
+	public void deleteUser(Long id);
+	public void addUser(User user);
 
 }

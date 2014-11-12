@@ -59,4 +59,9 @@ public class User {
 	public void setGroup(List<Group> group) {
 		this.group = group;
 	}
+	
+	@Override
+	public String toString(){
+		return this.id +" "+ this.name;
+	}
 }

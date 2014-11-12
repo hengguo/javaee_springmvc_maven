@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
-import demo.controller.UserController;
 import demo.domain.User;
 import demo.mapper.UserMapper;
 import demo.service.UserService;
@@ -36,6 +35,19 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> selectUsers(Map map) {
 		return userDao.selectUsers(map);
+	}
+
+	@Override
+	public void deleteAndInsert(User user) {
+		System.out.println("delete之前存在这条数据吗?");
+		System.out.println(this.userDao.selectUser(user.getId()));
+		this.userDao.deleteUser(user.getId());
+		System.out.println("delete之后存在这条数据吗?");
+		System.out.println(this.userDao.selectUser(user.getId()));
+		this.userDao.addUser(user);
+		System.out.println("插入之后存在这条数据吗?");
+		System.out.println(this.userDao.selectUser(user.getId()));
+
 	}
 
 }

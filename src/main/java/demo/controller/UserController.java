@@ -104,4 +104,13 @@ public class UserController {
         System.out.println("recive message:\t"+map);
 		List<User> users =userService.selectUsers(new HashMap<Object, Object>());
 	}
+	
+	@RequestMapping("deleteAndInsert")
+	public void deleteAndInsert(HttpServletRequest request){
+		User user = new User();
+		user.setId(101);
+		user.setName("D");
+		user.setPassword("D");
+		this.userService.deleteAndInsert(user);
+	}
 }
