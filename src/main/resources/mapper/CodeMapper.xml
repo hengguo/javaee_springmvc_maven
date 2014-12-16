@@ -15,7 +15,7 @@
 		SELECT * FROM v_code where code_id=#{codeKey}
 	</select>
 	
-	<select id="getHxCodePageList" parameterType="com.gome.common.page.Page" resultType="hashmap">
+	<select id="getHxCodePageList" parameterType="Page" resultType="hashmap">
 		SELECT code_id codeId, code_name codeName FROM code where editable = 1
 	</select>
 	

@@ -7,8 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.gome.common.page.Page;
-
+import demo.common.page.Page;
 import demo.domain.Code;
 import demo.mapper.CodeDao;
 import demo.service.CodeService;

@@ -5,8 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import com.gome.common.page.Page;
-
+import demo.common.page.Page;
 import demo.domain.Code;
 
 @Repository("codeDao")

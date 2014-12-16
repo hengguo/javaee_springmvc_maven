@@ -3,7 +3,7 @@ package demo.service;
 import java.util.List;
 import java.util.Map;
 
-import com.gome.common.page.Page;
+import demo.common.page.Page;
 import demo.domain.Code;
 
 public interface CodeService {

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
+import demo.common.page.Page;
 import demo.domain.User;
 import demo.mapper.UserMapper;
 import demo.service.UserService;
@@ -33,8 +34,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> selectUsers(Map map) {
-		return userDao.selectUsers(map);
+	public List<User> selectUsersPageList(Page page) {
+		return userDao.selectUsersPageList(page);
 	}
 
 	@Override

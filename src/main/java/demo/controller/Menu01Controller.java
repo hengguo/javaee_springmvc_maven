@@ -37,4 +37,10 @@ public class Menu01Controller {
 		request.setAttribute("test", "ttt");
 		return new ModelAndView("userList", "users", users);
 	}
+	
+	@RequestMapping(value="/autocompleteView", produces = "text/plain;charset=utf-8")
+	@ResponseBody
+	public ModelAndView autocompleteView(HttpServletRequest request, HttpServletResponse response) {
+		return new ModelAndView("menu01/autocomplete");
+	}
 }

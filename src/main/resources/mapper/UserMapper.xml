@@ -27,10 +27,10 @@
 		left join group_info gi on ug.ug_g_id=gi.g_id where u.u_id = #{id}
 	</select>
   
-    <select id="selectUsers" parameterType = "java.util.HashMap" resultMap="userMap">
+    <select id="selectUsersPageList" parameterType = "Page" resultMap="userMap">
       SELECT 
         *
-      FROM user;
+      FROM user
     </select>
     <delete id="deleteUser" parameterType="long">
     	delete from user where u_id = #{id}

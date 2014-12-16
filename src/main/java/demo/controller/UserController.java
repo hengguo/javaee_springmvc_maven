@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import demo.common.page.Page;
 import demo.domain.User;
 import demo.service.UserService;
 import demo.util.JsonHelper;
@@ -73,19 +74,22 @@ public class UserController {
 	public String getDynamicUsers(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		LOG.info("getDynamicUsers 进来了");
 		Map<String, Object> map = (Map<String, Object>) request.getAttribute("SPRING");
-		//System.out.println(1/0);
-
-        System.out.println("recive message:\t"+map);
-		List<User> users =userService.selectUsers(new HashMap<Object, Object>());
+		map.put("t1", "aaaa");
+		List<String> list = new ArrayList<String>();
+		list.add("l1");list.add("l2");
+		map.put("l", list);
+		Page page = new Page();
+		page.setParam(map);
+		List<User> users =userService.selectUsersPageList(page);
 		LOG.info("getDynamicUsers要出去了");
-		return JsonUtil.writeListOBJToDataGrid(users.size(), users);
+		return JsonUtil.writeListOBJToDataGrid(page.getTotalResult(), users);
 	}
 	
 	@RequestMapping(value="/getFooter", produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String getFooter(HttpServletRequest request, HttpServletResponse response) throws Exception{
-
-		List<User> users =userService.selectUsers(new HashMap<Object, Object>());
+		Page page = new Page();
+		List<User> users =userService.selectUsersPageList(page);
 		JSONObject object = new JSONObject();
 		object.put("total", users.size());
     	object.put("rows", JsonHelper.getJsonString4Object(JsonUtil.toGJson(users), "yyyy-MM-dd HH:mm:ss"));
@@ -100,9 +104,9 @@ public class UserController {
 	@RequestMapping(value="/nullReturn", produces = "text/plain;charset=UTF-8")
 	public void nullReturn(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		Map<String, Object> map = (Map<String, Object>) request.getAttribute("SPRING");
-
+		Page page = new Page();
         System.out.println("recive message:\t"+map);
-		List<User> users =userService.selectUsers(new HashMap<Object, Object>());
+		List<User> users =userService.selectUsersPageList(page);
 	}
 	
 	@RequestMapping("deleteAndInsert")

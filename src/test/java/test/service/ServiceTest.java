@@ -11,17 +11,13 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
-
-import demo.util.AESAPPUtils;
-import demo.util.GzipAESUtil;
 
 public class ServiceTest {
 	 @Test
 	 public void appSync(){
-		 String pre = "user/deleteAndInsert";
+		 String pre = "user/getDynamicUsers";
 	        String url = "http://localhost:8090/springmvc_demo/" + pre;
 	        JSONObject jo = new JSONObject();
 	        jo.put("A", "aaa");
@@ -29,10 +25,9 @@ public class ServiceTest {
 	            HttpPost httppost = new HttpPost(url);
 	            List<NameValuePair> params = new ArrayList<NameValuePair>();
 	            httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
-	            HttpResponse httpResponse = new DefaultHttpClient()
-	                    .execute(httppost);
+	            HttpResponse httpResponse = new DefaultHttpClient().execute(httppost);
 	            HttpEntity entity2 = httpResponse.getEntity();
-	            String result = EntityUtils.toString(entity2);
+	            System.out.println(EntityUtils.toString(entity2));
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }

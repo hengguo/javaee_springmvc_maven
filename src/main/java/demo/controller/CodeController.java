@@ -19,9 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gome.common.page.Page;
-
 import demo.common.Constrants;
+import demo.common.page.Page;
 import demo.domain.Code;
 import demo.service.CodeService;
 import demo.util.JsonUtil;
