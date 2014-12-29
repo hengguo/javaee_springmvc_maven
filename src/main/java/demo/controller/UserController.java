@@ -73,16 +73,22 @@ public class UserController {
 	@ResponseBody
 	public String getDynamicUsers(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		LOG.info("getDynamicUsers 进来了");
-		Map<String, Object> map = (Map<String, Object>) request.getAttribute("SPRING");
-		map.put("t1", "aaaa");
+		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("t1", "aaaa");
 		List<String> list = new ArrayList<String>();
-		list.add("l1");list.add("l2");
+		list.add("a");list.add("b");
+		list.add("c");list.add("dddddd");
 		map.put("l", list);
+		map.put("uid", "100");
 		Page page = new Page();
 		page.setParam(map);
-		List<User> users =userService.selectUsersPageList(page);
-		LOG.info("getDynamicUsers要出去了");
-		return JsonUtil.writeListOBJToDataGrid(page.getTotalResult(), users);
+		try{
+			List<User> users =userService.selectUsersPageList(page);
+			return JsonUtil.writeListOBJToDataGrid(page.getTotalResult(), users);
+		}catch(Exception e){
+			e.printStackTrace();
+			return "";
+		}
 	}
 	
 	@RequestMapping(value="/getFooter", produces="text/plain;charset=UTF-8")

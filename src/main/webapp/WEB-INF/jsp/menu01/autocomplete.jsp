@@ -6,31 +6,57 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Flights List.</title>
+  <style>
+  .ui-autocomplete-loading {
+    background: white url("${ctx}/js/jquery/images/ui-anim_basic_16x16.gif") right center no-repeat;
+  }
+  #city { width: 25em; }
+  </style>
 </head>
 <script type="text/javascript">
-	$().ready(function() {
-		$("#username").autocomplete('${ctx}/user/getDynamicUsers',{
-			minChars: 0,
-			max: 5,
-			autoFill: true,
-			mustMatch: true,
-			matchContains: true,
-			scrollHeight: 220,
-			formatItem: function(data, i, total) {
-				return "<I>"+data[0]+"</I>";
-			},
-			formatMatch: function(data, i, total) {
-				return data[0];
-			},
-			formatResult: function(data) {
-				return data[0];
-			}
-		});
-	});
+	$(function() {
+	    function log( message ) {
+	      $( "<div>" ).text( message ).prependTo( "#log" );
+	      $( "#log" ).scrollTop( 0 );
+	    }
+	 
+	    $( "#username" ).autocomplete({
+	      source: function( request, response ) {
+	        $.ajax({
+	          url: "${ctx}/user/getDynamicUsers",
+	          dataType: "json",
+	          data: {
+	            q: request.term
+	          },
+	          success: function( data ) {
+	            response( data );
+	          }
+	        });
+	      },
+	      minLength: 2,
+	      select: function( event, ui ) {
+	        log( ui.item ?
+	          "Selected: " + ui.item.label :
+	          "Nothing selected, input was " + this.value);
+	      },
+	      open: function() {
+	        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+	      },
+	      close: function() {
+	        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+	      }
+	    });
+	  });
 </script>
 <body>
-	<div>
-		<input type="text" name="username" id="username">
-p	</div>
+	<div class="ui-widget">
+ 	 <label for="username">Your city: </label>
+		<input id="username">
+	</div>
+
+<div class="ui-widget" style="margin-top:2em; font-family:Arial">
+  Result:
+  <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+</div>
 </body>
 </html>

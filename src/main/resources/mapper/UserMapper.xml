@@ -31,6 +31,15 @@
       SELECT 
         *
       FROM user
+      <where>
+       u_name in 
+          <foreach collection="param.l" open="(" close=")" item="item" separator=",">
+          	#{item}
+          </foreach>
+      	<if test="param.uid !=null">
+      		<![CDATA[ AND user.u_id < #{param.uid} ]]>
+      	</if>
+      </where>
     </select>
     <delete id="deleteUser" parameterType="long">
     	delete from user where u_id = #{id}

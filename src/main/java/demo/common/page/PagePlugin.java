@@ -23,6 +23,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.builder.xml.dynamic.ForEachSqlNode;
 import org.apache.ibatis.executor.ErrorContext;
 import org.apache.ibatis.executor.ExecutorException;
+import org.apache.ibatis.executor.parameter.DefaultParameterHandler;
+import org.apache.ibatis.executor.parameter.ParameterHandler;
 import org.apache.ibatis.executor.statement.BaseStatementHandler;
 import org.apache.ibatis.executor.statement.RoutingStatementHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
@@ -50,13 +52,28 @@ public class PagePlugin implements Interceptor {
     public Object intercept(Invocation ivk) throws Throwable {
         if (ivk.getTarget() instanceof RoutingStatementHandler) {
             RoutingStatementHandler statementHandler = (RoutingStatementHandler) ivk.getTarget();
-            BaseStatementHandler delegate = (BaseStatementHandler) ReflectHelper
-                .getValueByFieldName(statementHandler, "delegate");
-            MappedStatement mappedStatement = (MappedStatement) ReflectHelper.getValueByFieldName(
-                delegate, "mappedStatement");
+            BaseStatementHandler delegate = (BaseStatementHandler) ReflectHelper .getValueByFieldName(statementHandler, "delegate");
+            MappedStatement mappedStatement = (MappedStatement) ReflectHelper.getValueByFieldName(delegate, "mappedStatement");
             if (mappedStatement.getId().matches(pageSqlId)) {
                 BoundSql boundSql = delegate.getBoundSql();
                 Object parameterObject = boundSql.getParameterObject();
+                if (parameterObject instanceof Page) {  
+                    Page page = (Page) parameterObject;  
+                    //通过反射获取delegate父类BaseStatementHandler的mappedStatement属性  
+                    //拦截到的prepare方法参数是一个Connection对象  
+                    Connection connection = (Connection)ivk.getArgs()[0];  
+                    //获取当前要执行的Sql语句，也就是我们直接在Mapper映射语句中写的Sql语句  
+                    String sql = boundSql.getSql();  
+                    //给当前的page参数对象设置总记录数  
+                    this.setTotalRecord(page,  
+                           mappedStatement, connection);  
+                    //获取分页Sql语句  
+                    String pageSql = this.generatePageSql(sql, page);  
+                    //利用反射设置当前BoundSql对应的sql属性为我们建立好的分页Sql语句  
+                    ReflectHelper.setValueByFieldName(boundSql, "sql", pageSql);
+                }  
+                //--------
+                /*
                 if (parameterObject == null) {
                     throw new NullPointerException("parameterObject尚未实例化！");
                 } else {
@@ -97,7 +114,7 @@ public class PagePlugin implements Interceptor {
                     }
                     String pageSql = generatePageSql(sql, page);
                     ReflectHelper.setValueByFieldName(boundSql, "sql", pageSql);
-                }
+                }*/
             }
         }
         return ivk.proceed();
@@ -222,5 +239,56 @@ public class PagePlugin implements Interceptor {
             }
         }
     }
+    
+    /** 
+     * 给当前的参数对象page设置总记录数 
+     * 
+     * @param page Mapper映射语句对应的参数对象 
+     * @param mappedStatement Mapper映射语句 
+     * @param connection 当前的数据库连接 
+     */  
+    private void setTotalRecord(Page page,  
+           MappedStatement mappedStatement, Connection connection) {  
+       //获取对应的BoundSql，这个BoundSql其实跟我们利用StatementHandler获取到的BoundSql是同一个对象。  
+       //delegate里面的boundSql也是通过mappedStatement.getBoundSql(paramObj)方法获取到的。  
+       BoundSql boundSql = mappedStatement.getBoundSql(page);  
+       //获取到我们自己写在Mapper映射语句中对应的Sql语句  
+       String sql = boundSql.getSql();  
+       //通过查询Sql语句获取到对应的计算总记录数的sql语句  
+       String countSql = " SELECT COUNT(*) FROM ( " + sql + " ) tmp_count ";
+
+       //通过BoundSql获取对应的参数映射  
+       List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
+       //利用Configuration、查询记录数的Sql语句countSql、参数映射关系parameterMappings和参数对象page建立查询记录数对应的BoundSql对象。  
+//       BoundSql countBoundSql = new BoundSql(mappedStatement.getConfiguration(), countSql, parameterMappings, page);  
+       //通过mappedStatement、参数对象page和BoundSql对象countBoundSql建立一个用于设定参数的ParameterHandler对象  
+       ParameterHandler parameterHandler = new DefaultParameterHandler(mappedStatement, page, boundSql);  
+       //通过connection建立一个countSql对应的PreparedStatement对象。  
+       PreparedStatement pstmt = null;  
+       ResultSet rs = null;  
+       try {  
+           pstmt = connection.prepareStatement(countSql);  
+           //通过parameterHandler给PreparedStatement对象设置参数  
+           parameterHandler.setParameters(pstmt);  
+           //之后就是执行获取总记录数的Sql语句和获取结果了。  
+           rs = pstmt.executeQuery();  
+           if (rs.next()) {  
+              int totalRecord = rs.getInt(1);  
+              //给当前的参数page对象设置总记录数  
+              page.setTotalResult(totalRecord);
+           }  
+       } catch (SQLException e) {  
+           e.printStackTrace();  
+       } finally {  
+           try {  
+              if (rs != null)  
+                  rs.close();  
+               if (pstmt != null)  
+                  pstmt.close();  
+           } catch (SQLException e) {  
+              e.printStackTrace();  
+           }  
+       }  
+    } 
 
 }
