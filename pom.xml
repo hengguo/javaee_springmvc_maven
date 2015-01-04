@@ -229,6 +229,40 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.6.1</version>
 		</dependency>
+		<!-- jasperreports报表功能 -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+<!-- 		 <dependency> -->
+<!-- 			<groupId>com.lowagie</groupId> -->
+<!-- 			<artifactId>itext</artifactId> -->
+<!-- 			<version>2.1.0</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.itextpdf</groupId> -->
+<!-- 			<artifactId>itextpdf</artifactId> -->
+<!-- 			<version>5.5.4</version> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itext-asian</artifactId>
+			<version>5.2.0</version>
+		</dependency>
+		
+
+		<dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-digester3</artifactId>
+		<version>3.2</version>
+		<classifier>with-deps</classifier>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

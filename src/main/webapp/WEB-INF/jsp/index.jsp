@@ -89,16 +89,15 @@
     showProgressing();
     $.ajax({
             type: "POST",
-            url:"${ctx}/menu/list",
+            url:"${ctx}/json/index.json",
       async : true,
       error : function(request) {
         closeProgressing();
         alert("发送请求错误!");
       },
       success : function(rows) {
-        
         rows = convert(rows);
-        console.log(rows);
+        //console.log(rows);
         InitLeftMenu(rows);
       }
     });
@@ -120,7 +119,6 @@
       menulist += '<ul id="left_nav_tree_'+n.id+'" class="easyui-tree" style="margin-top:3px;">';
           
           menulist += '</ul>';
-          
           $('#left_nav').accordion('add', {
               title: n.text,
               content: menulist,
@@ -178,7 +176,7 @@
 	}
 
 	function convert(rows) {
-		rows = jQuery.parseJSON(rows);
+		//rows = jQuery.parseJSON(rows);
 		function exists(rows, pid) {
 			for (var i = 0; i < rows.length; i++) {
 				if (rows[i].id == pid)
