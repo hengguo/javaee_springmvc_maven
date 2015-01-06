@@ -8,6 +8,17 @@
 <script type="text/javascript">
 	var t;
 	var tm;
+	function closeAllTabs(t){
+		var allTabs = t.tabs('tabs');
+		var closeTabsTitle = [];
+		$.each(allTabs, function() {
+			var opt = this.panel('options');
+			closeTabsTitle.push(opt.title);
+		});
+		for ( var i = 0; i < closeTabsTitle.length; i++) {
+			t.tabs('close', closeTabsTitle[i]);
+		}
+	}
 	function add(url, treeNode) {
 		if (t.tabs("exists", treeNode.name)) {
 			t.tabs("select", treeNode.name);
@@ -31,6 +42,28 @@
 		}
 	}
 
+	function addTab(url, name){
+		if (t.tabs("exists", name)) {
+			t.tabs("select", name);
+		}else{
+			parent.$.messager.progress({
+				title : '提示',
+				text : '数据处理中，请稍候....'
+			});
+			closeAllTabs(t);
+			t.tabs("add", {
+				title : name,
+				content : "<iframe src='" + url +"' frameborder='0' style='border:0;width:100%;height:100%;'></iframe>",
+				cache : true,
+				closable : true,
+				selected : true,
+				border : false,
+				fit : true
+			});
+			parent.$.messager.progress('close');
+		}	
+	}
+	
 	$(function() {
 		t = $('#tabs').tabs({
 			fit : true,
@@ -41,6 +74,41 @@
 					left : e.pageX,
 					top : e.pageY
 				}).data("tabTitle", title);
+			}
+		});
+		tm = $('#tabsMenu').menu({
+			onClick : function(item) {
+				var curTabTitle = tm.data('tabTitle');
+				var type = $(item.target).attr('title');
+
+				if (type === 'refresh') {
+					t.tabs('getTab', curTabTitle).panel('refresh');
+					return;
+				}
+
+				if (type === 'close') {
+					var ct = t.tabs('getTab', curTabTitle);
+					if (ct.panel('options').closable) {
+						t.tabs('close', curTabTitle);
+					}
+					return;
+				}
+
+				var allTabs = t.tabs('tabs');
+				var closeTabsTitle = [];
+
+				$.each(allTabs, function() {
+					var opt = this.panel('options');
+					if (opt.closable && opt.title != curTabTitle && type === 'closeOther') {
+						closeTabsTitle.push(opt.title);
+					} else if (opt.closable && type === 'closeAll') {
+						closeTabsTitle.push(opt.title);
+					}
+				});
+
+				for ( var i = 0; i < closeTabsTitle.length; i++) {
+					t.tabs('close', closeTabsTitle[i]);
+				}
 			}
 		});
 	});

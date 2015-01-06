@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
@@ -37,7 +38,7 @@ public class CodeController {
 	 */
 	@RequestMapping(value="/getCombobox/{codeKey}", produces="text/plain;charset=utf-8")
 	@ResponseBody
-	public String getCombobox(@PathVariable String codeKey, String value){
+	public String getCombobox(@PathVariable String codeKey, String value, HttpServletRequest request){
 		if("true".equalsIgnoreCase(value)) value = "1";
 		if("false".equalsIgnoreCase(value)) value = "0";
 		Map<String, String> map = Constrants.CODEMAP.get(codeKey);
@@ -64,20 +65,23 @@ public class CodeController {
 	/*
 	 * 获取所有组织机构
 	 */
-	@RequestMapping(value="/getOrgCombobox", produces="text/plain;charset=utf-8")
+	@RequestMapping(value="/getList", produces="text/plain;charset=utf-8")
 	@ResponseBody
-	public String getOrgCombobox(String value){
-		List<Map<String, String>> list = hxCodeService.getOrgCombobox();
+	public String getOrgCombobox(HttpServletRequest request, String q){
+		List<Map<String, String>> list = hxCodeService.getList(q);
 		JSONArray array = new JSONArray();
 		
 		for(Map<String, String> map : list){
 			JSONObject object = new JSONObject();
-			object.put("value", map.get("id"));
-			object.put("text", map.get("name"));
-			if(map.get("id").equals(value)){
+			object.put("value", map.get("code_key"));
+			object.put("text", map.get("code_value"));
+			if(map.get("code_key").equals(q)){
 				object.put("selected", true);
 			}
 			array.add(object);
+			if(array.size()==10){
+				break;
+			}
 		}
 		return array.toString();
 	}

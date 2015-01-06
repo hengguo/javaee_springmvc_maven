@@ -27,6 +27,10 @@
 		select id, name from v_organization
 	</select>
 	
+	<select id="getList" parameterType="string" resultType="hashmap">
+		select * from code_setting where code_value like CONCAT('%',#{q},'%')
+	</select>
+	
 	<select id="getFittingMenu" parameterType="string" resultType="hashmap">
 		select t.fitting_auth_id id, t1.fitting_auth_name name
 		from hx_position_fitting t, hx_fitting_auth t1

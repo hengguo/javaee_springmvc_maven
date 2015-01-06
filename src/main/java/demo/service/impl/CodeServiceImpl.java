@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import demo.common.page.Page;
-import demo.domain.Code;
 import demo.mapper.CodeDao;
 import demo.service.CodeService;
 
@@ -37,6 +36,11 @@ public class CodeServiceImpl implements CodeService {
 	@Override
 	public List<Map<String, String>> getFittingMenu(String fittingPositionId) {
 		return codeDao.getFittingMenu(fittingPositionId);
+	}
+
+	@Override
+	public List<Map<String, String>> getList(String q) {
+		return this.codeDao.getList(q);
 	}
 
 

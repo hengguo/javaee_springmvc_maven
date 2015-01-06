@@ -13,10 +13,12 @@ import javax.sql.DataSource;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.query.JRXPathQueryExecuterFactory;
 import net.sf.jasperreports.engine.util.FileBufferedOutputStream;
 import net.sf.jasperreports.engine.util.JRLoader;
 
@@ -43,9 +45,11 @@ public class JasperReportController {
 		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperFile);
 		Map<String,Object> parameters = new HashMap<String, Object>();
 		parameters.put("report_name", "我的报表1");
+		//设置数据源样式
+		parameters.put(JRXPathQueryExecuterFactory.XML_DATE_PATTERN, "yyyy-MM-dd HH:mm:ss");
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
 				parameters, ((DataSource)SpringUtil.getBean("dataSource")).getConnection());
-		
+		JasperExportManager.exportReportToPdf(jasperPrint);
 		if (jasperPrint!=null) {
 			FileBufferedOutputStream fbos = new FileBufferedOutputStream();
 			JRPdfExporter exporter = new JRPdfExporter();
@@ -77,6 +81,9 @@ public class JasperReportController {
 				}
 			}
 		}
-
+	}
+	
+	public void pdf(){
+		
 	}
 }

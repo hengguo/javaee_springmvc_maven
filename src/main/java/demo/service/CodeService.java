@@ -14,4 +14,6 @@ public interface CodeService {
 	List<Map<String, String>> getOrgCombobox();
 
 	List<Map<String, String>> getFittingMenu(String fittingPositionId);
+
+	List<Map<String, String>> getList(String q);
 }
