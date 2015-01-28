@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 	private static int ctn = 0;
 
 	public UserServiceImpl() {
-		System.out.println("UserServiceImpl ctn = " + ctn);
+		System.out.println("UserServiceImpl initialized count = " + ctn);
 		UserServiceImpl.ctn++;
 	}
 	@Resource

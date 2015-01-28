@@ -32,7 +32,7 @@ public class AspectDemo {
 	private static int ctn = 0;
 
 	public AspectDemo() {
-		System.out.println("AspectDemo ctn = " + ctn);
+		System.out.println("AspectDemo initialized count = " + ctn);
 		AspectDemo.ctn++;
 	}
 

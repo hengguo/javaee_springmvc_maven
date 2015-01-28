@@ -4,3 +4,5 @@
 	EasyUI
 	mybatis
 	Active MQ
+
+	CXF WebService

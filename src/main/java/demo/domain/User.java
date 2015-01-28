@@ -3,11 +3,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @describe: User实体类
- * @author:    Nirvana
- * @version:   V1.0  2011-3-11下午06:06:49 create
+ * User 实体类
+ * @author Wang.Hengguo
+ * @date 2015年1月28日下午2:49:01
  */
-
 public class User {
 
 	private long id;

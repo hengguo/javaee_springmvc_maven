@@ -32,7 +32,7 @@ public class UserController {
 	private static int ctn = 0;
 
 	public UserController() {
-		System.out.println("UserController ctn = " + ctn);
+		System.out.println("UserController initialized count = " + ctn);
 		UserController.ctn++;
 	}
 	@Resource

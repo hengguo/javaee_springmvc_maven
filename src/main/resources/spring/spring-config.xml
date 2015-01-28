@@ -28,7 +28,8 @@
 	</bean>
 
 	<!-- <import resource="classpath*:/spring/mq-message.xml" /> -->
-	<import resource="classpath*:/spring/redis-context.xml" />
+<!-- 	<import resource="classpath*:/spring/redis-context.xml" /> -->
+	<import resource="classpath*:/spring/spring-ws.xml" />
 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
