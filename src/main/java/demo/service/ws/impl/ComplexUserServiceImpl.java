@@ -17,7 +17,6 @@ import demo.service.ws.ComplexUserService;
  */
 @WebService
 @SOAPBinding(style = Style.RPC)
-@SuppressWarnings("deprecation")
 public class ComplexUserServiceImpl implements ComplexUserService {
     
     public User getUserByName(@WebParam(name = "name") String name) {

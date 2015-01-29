@@ -57,7 +57,7 @@
 
 	<servlet-mapping>
 		<servlet-name>CXFService</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/ws/*</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>/index/main</welcome-file>

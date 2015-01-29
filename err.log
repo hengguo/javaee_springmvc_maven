@@ -1,0 +1,97 @@
+2015-01-29 15:10:25 BasicClientConnectionManager.java DEBUG Get connection for route {}->http://localhost:8080
+2015-01-29 15:10:25 DefaultClientConnectionOperator.java DEBUG Connecting to localhost:8080
+2015-01-29 15:10:26 DefaultClientConnectionOperator.java DEBUG Connect to localhost:8080 timed out. Connection will be retried using another IP address
+2015-01-29 15:10:26 DefaultClientConnectionOperator.java DEBUG Connecting to localhost:8080
+2015-01-29 15:10:27 RequestAddCookies.java DEBUG CookieSpec selected: best-match
+2015-01-29 15:10:27 RequestAuthCache.java DEBUG Auth cache not set in the context
+2015-01-29 15:10:27 RequestTargetAuthentication.java DEBUG Target auth state: UNCHALLENGED
+2015-01-29 15:10:27 RequestProxyAuthentication.java DEBUG Proxy auth state: UNCHALLENGED
+2015-01-29 15:10:27 DefaultRequestDirector.java DEBUG Attempt 1 to execute request
+2015-01-29 15:10:27 DefaultClientConnection.java DEBUG Sending request: POST /springmvc_demo/user/getDynamicUsers HTTP/1.1
+2015-01-29 15:10:27 Wire.java DEBUG  >> "POST /springmvc_demo/user/getDynamicUsers HTTP/1.1[\r][\n]"
+2015-01-29 15:10:27 Wire.java DEBUG  >> "Content-Length: 0[\r][\n]"
+2015-01-29 15:10:27 Wire.java DEBUG  >> "Content-Type: application/x-www-form-urlencoded; charset=UTF-8[\r][\n]"
+2015-01-29 15:10:27 Wire.java DEBUG  >> "Host: localhost:8080[\r][\n]"
+2015-01-29 15:10:27 Wire.java DEBUG  >> "Connection: Keep-Alive[\r][\n]"
+2015-01-29 15:10:27 Wire.java DEBUG  >> "User-Agent: Apache-HttpClient/4.3.4 (java 1.5)[\r][\n]"
+2015-01-29 15:10:27 Wire.java DEBUG  >> "[\r][\n]"
+2015-01-29 15:10:27 DefaultClientConnection.java DEBUG >> POST /springmvc_demo/user/getDynamicUsers HTTP/1.1
+2015-01-29 15:10:27 DefaultClientConnection.java DEBUG >> Content-Length: 0
+2015-01-29 15:10:27 DefaultClientConnection.java DEBUG >> Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+2015-01-29 15:10:27 DefaultClientConnection.java DEBUG >> Host: localhost:8080
+2015-01-29 15:10:27 DefaultClientConnection.java DEBUG >> Connection: Keep-Alive
+2015-01-29 15:10:27 DefaultClientConnection.java DEBUG >> User-Agent: Apache-HttpClient/4.3.4 (java 1.5)
+2015-01-29 15:10:36 Wire.java DEBUG  << "HTTP/1.1 500 Internal Server Error[\r][\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "Server: Apache-Coyote/1.1[\r][\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "Content-Type: text/html;charset=utf-8[\r][\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "Content-Language: en[\r][\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "Content-Length: 6394[\r][\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "Date: Thu, 29 Jan 2015 07:10:36 GMT[\r][\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "Connection: close[\r][\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[\r][\n]"
+2015-01-29 15:10:36 DefaultClientConnection.java DEBUG Receiving response: HTTP/1.1 500 Internal Server Error
+2015-01-29 15:10:36 DefaultClientConnection.java DEBUG << HTTP/1.1 500 Internal Server Error
+2015-01-29 15:10:36 DefaultClientConnection.java DEBUG << Server: Apache-Coyote/1.1
+2015-01-29 15:10:36 DefaultClientConnection.java DEBUG << Content-Type: text/html;charset=utf-8
+2015-01-29 15:10:36 DefaultClientConnection.java DEBUG << Content-Language: en
+2015-01-29 15:10:36 DefaultClientConnection.java DEBUG << Content-Length: 6394
+2015-01-29 15:10:36 DefaultClientConnection.java DEBUG << Date: Thu, 29 Jan 2015 07:10:36 GMT
+2015-01-29 15:10:36 DefaultClientConnection.java DEBUG << Connection: close
+2015-01-29 15:10:36 Wire.java DEBUG  << "<html><head><title>Apache Tomcat/7.0.53 - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 500 - Handler processing failed; nested exception is java.lang.NoClassDefFoundError: test/service/ServiceTest</h1><HR size="1" noshade="noshade"><p><b>type</b> Exception report</p><p><b>message</b> <u>Handler processing failed; nested exception is java.lang.NoClassDefFoundError: test/service/ServiceTest</u></p><p><b>description</b> <u>The server encountered an internal error that prevented it from fulfilling this request.</u></p><p><b>exception</b> <pre>org.springframework.web.util.NestedServletException: Handler processing failed; nested exception is java.lang.NoClassDefFoundError: test/service/ServiceTest[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.DispatcherServlet.triggerAfterCompletionWithError(DispatcherServlet.java:1259)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:945)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:856)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:936)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:838)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]javax.servlet.http.HttpServlet.service(HttpServlet.java:646)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:812)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]javax.servlet.http.HttpServlet.service(HttpServlet.java:727)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:88)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "</pre></p><p><b>root cause</b> <pre>java.lang.NoClassDefFoundError: test/service/ServiceTest[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]demo.controller.UserController.getDynamicUsers(UserController.java:76)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]java.lang.reflect.Method.invoke(Unknown Source)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:219)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:745)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:686)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:80)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:925)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:856)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:936)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:838)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]javax.servlet.http.HttpServlet.service(HttpServlet.java:646)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:812)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]javax.servlet.http.HttpServlet.service(HttpServlet.java:727)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:88)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "</pre></p><p><b>root cause</b> <pre>java.lang.ClassNotFoundException: test.service.ServiceTest[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1720)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1571)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]demo.controller.UserController.getDynamicUsers(UserController.java:76)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]java.lang.reflect.Method.invoke(Unknown Source)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:219)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:745)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:686)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:80)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:925)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:856)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:936)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:838)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]javax.servlet.http.HttpServlet.service(HttpServlet.java:646)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:812)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]javax.servlet.http.HttpServlet.service(HttpServlet.java:727)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:88)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "[0x9]org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)[\n]"
+2015-01-29 15:10:36 Wire.java DEBUG  << "</pre></p><p><b>note</b> <u>The full stack trace of the root cause is available in the Apache Tomcat/7.0.53 logs.</u></p><HR size="1" noshade="noshade"><h3>Apache Tomcat/7.0.53</h3></body></html>"
+2015-01-29 15:10:36 BasicClientConnectionManager.java DEBUG Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@5bf9e31e
+2015-01-29 15:10:36 DefaultClientConnection.java DEBUG Connection 0.0.0.0:58076<->0:0:0:0:0:0:0:1:8080 shut down
