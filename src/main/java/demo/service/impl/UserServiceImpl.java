@@ -7,6 +7,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
+import demo.common.Constrants;
+import demo.common.DataSourceContextHolder;
+import demo.common.DynamicDataSource;
 import demo.common.page.Page;
 import demo.domain.User;
 import demo.mapper.UserMapper;
@@ -25,11 +28,13 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userDao;
 	@Override
 	public User selectUser(Long id) {
+        DataSourceContextHolder.setDataSourceType(Constrants.Admin);// 设置为另一个数据源
 		return userDao.selectUser(id);
 	}
 
 	@Override
 	public User selectUserGroup(Long id) {
+        DataSourceContextHolder.setDataSourceType(Constrants.User);// 设置为另一个数据源
 		return userDao.selectUserGroup(id);
 	}
 
@@ -50,5 +55,30 @@ public class UserServiceImpl implements UserService {
 		System.out.println(this.userDao.selectUser(user.getId()));
 
 	}
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void rollbackOper() {
+        DataSourceContextHolder.setDataSourceType(Constrants.User);// 设置为另一个数据源
+        User u1 = this.userDao.selectUser(1l);
+        System.out.println(u1);
+        
+        
+        DataSourceContextHolder.setDataSourceType(Constrants.Admin);// 设置为另一个数据源
+        User u2 = this.userDao.selectUser(1l);
+        System.out.println(u2);
+        
+//        User user = new User();
+//        user.setId(130l);
+//        this.userDao.addUser(user);
+//        
+//        DataSourceContextHolder.setDataSourceType(Constrants.User);// 设置为另一个数据源
+//        
+//        User user2 = new User();
+//        user2.setId(118L);
+//        this.userDao.addUser(user2);
+    }
 
 }

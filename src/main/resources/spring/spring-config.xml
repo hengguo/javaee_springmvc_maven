@@ -28,7 +28,7 @@
 	</bean>
 
 	<!-- <import resource="classpath*:/spring/mq-message.xml" /> -->
-<!-- 	<import resource="classpath*:/spring/redis-context.xml" /> -->
+	<!-- <import resource="classpath*:/spring/redis-context.xml" /> -->
 	<import resource="classpath*:/spring/spring-ws.xml" />
 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
@@ -76,14 +76,14 @@
 		<property name="configLocation" value="classpath:mybatis.xml"></property>
 	</bean>
 
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="demo.mapper"></property>
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
-	</bean>
+<!-- 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> -->
+<!-- 		<property name="basePackage" value="demo.mapper"></property> -->
+<!-- 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property> -->
+<!-- 	</bean> -->
 
 	<bean id="txManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="dyDataSource" />
 	</bean>
 
 	<!--配置事务处理策略，transaction-manager属性指定事务管理器。 若事务管理器bean的id即为transactionManager，则 
@@ -100,6 +100,7 @@
 			<tx:method name="put*" propagation="REQUIRED" />
 			<tx:method name="use*" propagation="REQUIRED" />
 			<tx:method name="handle*" propagation="REQUIRED" />
+			<tx:method name="rollbackOper" propagation="REQUIRED" read-only="true" />
 
 			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
 			<tx:method name="count*" propagation="REQUIRED" read-only="true" />
@@ -138,5 +139,66 @@
 	<!-- </aop:config> -->
 
 	<bean id="flightService" class="demo.service.impl.FlightServiceImpl"></bean>
+
+	<!-- 数据源相同的内容 -->
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		id="parentDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>root</value>
+		</property>
+	</bean>
+
+	<!-- 数据库test -->
+	<bean parent="parentDataSource" id="adminDataSource">
+		<property name="url">
+			<value>jdbc:mysql://localhost:3306/test</value>
+		</property>
+	</bean>
+	<!-- 数据库test1 -->
+	<bean parent="parentDataSource" id="userDataSource">
+		<property name="url">
+			<value>jdbc:mysql://localhost:3306/test2</value>
+		</property>
+	</bean>
+
+	<!-- 编写spring 配置文件的配置多数源映射关系 -->
+	<bean class="demo.common.DynamicDataSource" id="dyDataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<entry value-ref="adminDataSource" key="db1"></entry>
+				<entry value-ref="userDataSource" key="db2"></entry>
+			</map>
+
+		</property>
+		<property name="defaultTargetDataSource" ref="adminDataSource">
+		</property>
+
+	</bean>
+
+	<!-- sessionFactory的配置 -->
+
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="demo.mapper"></property>
+		<property name="sqlSessionFactoryBeanName" value="sessionFactory"></property>
+	</bean>
+
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sessionFactory">
+		<property name="dataSource">
+			<ref local="dyDataSource"></ref>
+		</property>
+		<!-- 实体映射资源 -->
+		<property name="mapperLocations" value="classpath:mapper/*.xml" />
+		<property name="configLocation" value="classpath:mybatis.xml"></property>
+		<property name="typeAliasesPackage" value="demo.domain" />
+
+	</bean>
+
+
 
 </beans>

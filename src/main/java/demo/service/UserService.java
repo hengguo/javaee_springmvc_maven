@@ -14,4 +14,12 @@ public interface UserService {
 	public List<User> selectUsersPageList(Page page);
 	
 	public void deleteAndInsert(User user);
+
+	/**
+	 * 操作会出错  事务会rollback
+	 * @Title: rollbackOper
+	 * @Description: (这里用一句话描述这个方法的作用). <br/> 
+	 * @author Wang.Hengguo
+	 */
+	public void rollbackOper();
 }
