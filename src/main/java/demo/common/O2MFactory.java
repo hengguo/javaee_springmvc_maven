@@ -34,7 +34,7 @@ public class O2MFactory {
        }else if("db2".equals(a)){
            System.out.println(a);
        }
-       return 
+       return null;
     }
 
 }
