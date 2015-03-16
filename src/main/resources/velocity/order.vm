@@ -55,15 +55,20 @@
     <PARAMS/>
   </METADATA>
   <ROWDATA>
-    <ROW GSXX01=${GSXX01} KCLX="${KCLX}" SPFL01="{SPFL01}" SPFLMC="${SPFLMC}" CK01="{CK01}" CKMC="{CKMC}" ZDDM="{ZDDM}" ZDMC="{ZDMC}">
+    <ROW GSXX01="$!{row.GSXX01}" KCLX="$!{row.KCLX}" SPFL01="$!{row.SPFL01}" SPFLMC="$!{row.SPFLMC}" CK01="$!{row.CK01}" CKMC="$!{row.CKMC}" ZDDM="$!{row.ZDDM}" ZDMC="$!{row.ZDMC}">
       <JQM>
-        <ROWJQM JLID="{JLID}" GSXX01="{GSXX01}" CSJQM01="{CSJQM01}" SPXX01="{SPXX01}" SPBM="{SPBM}" SPMC="{SPMC}" SL="{SL}" XH="{XH}" ZDSL="{ZDSL}" WLDW01="{WLDW01}" DWMC="{DWMC}" BM01="{BM01}" CK01="{CK01}" CKMC="{CKMC}" SMSL="{SMSL}" CMKC="{CMKC}" CKGSXX="{CKGSXX}">
+      #foreach ($rowjqm in $row.rowjqms)
+        <ROWJQM JLID="$!{rowjqm.JLID}" GSXX01="$!{rowjqm.GSXX01}" CSJQM01="$!{rowjqm.CSJQM01}" SPXX01="$!{rowjqm.SPXX01}" SPBM="$!{rowjqm.SPBM}" SPMC="$!{rowjqm.SPMC}" SL="$!{rowjqm.SL}" XH="$!{rowjqm.XH}" 
+        		ZDSL="$!{rowjqm.ZDSL}" WLDW01="$!{rowjqm.WLDW01}" DWMC="$!{rowjqm.DWMC}" BM01="$!{rowjqm.BM01}" CK01="$!{rowjqm.CK01}" CKMC="$!{rowjqm.CKMC}" SMSL="$!{rowjqm.SMSL}" CMKC="$!{rowjqm.CMKC}" CKGSXX="$!{rowjqm.CKGSXX}">
           <JQMMX>
-            <ROWJQMMX JLID="{JLID}" JQM01="{JQM01}" GSXX01="{GSXX01}" XH="{XH}" CSJQM01="{CSJQM01}" TIME02="{TIME02}"/>
+          #foreach ($rowjqmmx in $rowjqm.rowjqmmxs)
+            <ROWJQMMX JLID="$!{rowjqmmx.JLID}" JQM01="$!{rowjqmmx.JQM01}" GSXX01="$!{rowjqmmx.GSXX01}" XH="$!{rowjqmmx.XH}" CSJQM01="$!{rowjqmmx.CSJQM01}" TIME02="$!{rowjqmmx.TIME02}"/>
+          #end
           </JQMMX>
         </ROWJQM>
+      #end
       </JQM>
     </ROW>
   </ROWDATA>
 </DATAPACKET>
-#end
+
