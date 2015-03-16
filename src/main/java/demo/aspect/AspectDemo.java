@@ -36,7 +36,7 @@ public class AspectDemo {
 		AspectDemo.ctn++;
 	}
 
-	@Pointcut("execution(* demo.controller.UserController.XXXXX(..))")
+	@Pointcut("execution(* demo.controller.UserController.getDynamicUsers(..))")
 	public void exeTest() {
 	}
 

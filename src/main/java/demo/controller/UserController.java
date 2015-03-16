@@ -83,13 +83,27 @@ public class UserController {
 		Page page = new Page();
 		page.setParam(map);
 		try{
-			List<User> users =userService.selectUsersPageList(page);
-			return JsonUtil.writeListOBJToDataGrid(page.getTotalResult(), users);
+		    userService.rollbackOper();
+		    return "";
+//			List<User> users =userService.selectUsersPageList(page);
+//			return JsonUtil.writeListOBJToDataGrid(page.getTotalResult(), users);
 		}catch(Exception e){
 			e.printStackTrace();
 			return "";
 		}
 	}
+	
+	@RequestMapping(value="/rollbackOper", produces="text/plain;charset=UTF-8")
+    @ResponseBody
+    public String rollbackOper(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        try{
+            userService.rollbackOper();
+            return "";
+        }catch(Exception e){
+            e.printStackTrace();
+            return "";
+        }
+    }
 	
 	@RequestMapping(value="/getFooter", produces="text/plain;charset=UTF-8")
 	@ResponseBody

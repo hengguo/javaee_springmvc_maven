@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import demo.common.Constrants;
 import demo.common.DataSourceContextHolder;
-import demo.common.DynamicDataSource;
 import demo.common.page.Page;
 import demo.domain.User;
 import demo.mapper.UserMapper;
@@ -61,12 +60,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void rollbackOper() {
-        DataSourceContextHolder.setDataSourceType(Constrants.User);// 设置为另一个数据源
         User u1 = this.userDao.selectUser(1l);
         System.out.println(u1);
         
         
-        DataSourceContextHolder.setDataSourceType(Constrants.Admin);// 设置为另一个数据源
         User u2 = this.userDao.selectUser(1l);
         System.out.println(u2);
         

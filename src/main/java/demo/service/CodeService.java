@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import demo.common.page.Page;
-import demo.domain.Code;
 
 public interface CodeService {
 	List<Map<String, Object>> getHxCodePageList(Page page);
