@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<DATAPACKET Version="2.0">
+  <METADATA>
+    <FIELDS>
+      <FIELD attrname="GSXX01" fieldtype="string" WIDTH="10"/>
+      <FIELD attrname="CSJQM01" fieldtype="fixed" WIDTH="16"/>
+      <FIELD attrname="KCLX" fieldtype="i4"/>
+      <FIELD attrname="SPFL01" fieldtype="string" WIDTH="20"/>
+      <FIELD attrname="SPFLMC" fieldtype="string" WIDTH="80"/>
+      <FIELD attrname="CK01" fieldtype="string" WIDTH="20"/>
+      <FIELD attrname="CKMC" fieldtype="string" WIDTH="80"/>
+      <FIELD attrname="ZDDM" fieldtype="string" WIDTH="20"/>
+      <FIELD attrname="ZDMC" fieldtype="string" WIDTH="80"/>
+      <FIELD attrname="SHDM" fieldtype="string" WIDTH="20"/>
+      <FIELD attrname="SHMC" fieldtype="string" WIDTH="80"/>
+      <FIELD attrname="ZDRQ" fieldtype="dateTime"/>
+      <FIELD attrname="SHRQ" fieldtype="dateTime"/>
+      <FIELD attrname="TIME01" fieldtype="string" WIDTH="30"/>
+      <FIELD attrname="JQM" fieldtype="nested">
+        <FIELDS>
+          <FIELD attrname="JLID" fieldtype="fixed" WIDTH="32"/>
+          <FIELD attrname="GSXX01" fieldtype="string" WIDTH="10"/>
+          <FIELD attrname="CSJQM01" fieldtype="fixed" WIDTH="16"/>
+          <FIELD attrname="SPXX01" fieldtype="fixed" WIDTH="16"/>
+          <FIELD attrname="SPBM" fieldtype="string" WIDTH="20"/>
+          <FIELD attrname="SPMC" fieldtype="string" WIDTH="150"/>
+          <FIELD attrname="SL" fieldtype="fixed" DECIMALS="4" WIDTH="16"/>
+          <FIELD attrname="XH" fieldtype="fixed" WIDTH="16"/>
+          <FIELD attrname="ZDSL" fieldtype="fixed" DECIMALS="4" WIDTH="16"/>
+          <FIELD attrname="WLDW01" fieldtype="string" WIDTH="20"/>
+          <FIELD attrname="DWMC" fieldtype="string" WIDTH="100"/>
+          <FIELD attrname="BM01" fieldtype="string" WIDTH="30"/>
+          <FIELD attrname="CK01" fieldtype="string" WIDTH="30"/>
+          <FIELD attrname="CKMC" fieldtype="string" WIDTH="80"/>
+          <FIELD attrname="SMSL" fieldtype="fixed" DECIMALS="4" WIDTH="16"/>
+          <FIELD attrname="TIME01" fieldtype="string" WIDTH="20"/>
+          <FIELD attrname="CMKC" fieldtype="i4"/>
+          <FIELD attrname="CKGSXX" fieldtype="string" WIDTH="10"/>
+          <FIELD attrname="JQMMX" fieldtype="nested">
+            <FIELDS>
+              <FIELD attrname="JLID" fieldtype="fixed" WIDTH="32"/>
+              <FIELD attrname="JQM01" fieldtype="string" WIDTH="30"/>
+              <FIELD attrname="GSXX01" fieldtype="string" WIDTH="10"/>
+              <FIELD attrname="XH" fieldtype="fixed" WIDTH="16"/>
+              <FIELD attrname="CSJQM01" fieldtype="fixed" WIDTH="16"/>
+              <FIELD attrname="TIME02" fieldtype="string" WIDTH="30"/>
+            </FIELDS>
+            <PARAMS/>
+          </FIELD>
+        </FIELDS>
+        <PARAMS/>
+      </FIELD>
+    </FIELDS>
+    <PARAMS/>
+  </METADATA>
+  <ROWDATA>
+    <ROW GSXX01=${GSXX01} KCLX="${KCLX}" SPFL01="{SPFL01}" SPFLMC="${SPFLMC}" CK01="{CK01}" CKMC="{CKMC}" ZDDM="{ZDDM}" ZDMC="{ZDMC}">
+      <JQM>
+        <ROWJQM JLID="{JLID}" GSXX01="{GSXX01}" CSJQM01="{CSJQM01}" SPXX01="{SPXX01}" SPBM="{SPBM}" SPMC="{SPMC}" SL="{SL}" XH="{XH}" ZDSL="{ZDSL}" WLDW01="{WLDW01}" DWMC="{DWMC}" BM01="{BM01}" CK01="{CK01}" CKMC="{CKMC}" SMSL="{SMSL}" CMKC="{CMKC}" CKGSXX="{CKGSXX}">
+          <JQMMX>
+            <ROWJQMMX JLID="{JLID}" JQM01="{JQM01}" GSXX01="{GSXX01}" XH="{XH}" CSJQM01="{CSJQM01}" TIME02="{TIME02}"/>
+          </JQMMX>
+        </ROWJQM>
+      </JQM>
+    </ROW>
+  </ROWDATA>
+</DATAPACKET>
+#end
