@@ -7,15 +7,16 @@ package demo.velocity;
  * http://www.blogjava.net/zhuyan/articles/108818.html
  */
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
+import net.sf.json.JSONObject;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
+
+import demo.util.JsonUtil;
 
 public class OrderVelocity {
 	 public static void main(String[] args) {
@@ -65,6 +66,18 @@ public class OrderVelocity {
 	 
 	 t.merge(ctx, sw);
 	 
-	 System.out.println(sw.toString());
+//	 System.out.println(sw.toString());
+//	 System.out.println();
+	 String s1 = JsonUtil.toGJson(row);
+	 JSONObject obj = JSONObject.fromObject(s1);//再使用JsonObject遍历一个个的对像
+	 Row oo = (Row)obj.toBean(obj,Row.class);//指定转换的类型，但仍需要强制转化-成功
+	 String s2 = JsonUtil.toGJson(oo);
+	 
+	 
+	 ctx.put("row", oo);
+     StringWriter sw2 = new StringWriter();
+     t.merge(ctx, sw2);
+     
+	 System.err.println(sw2.toString());
 	 }
 	}

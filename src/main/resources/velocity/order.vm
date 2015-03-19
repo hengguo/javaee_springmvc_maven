@@ -62,7 +62,8 @@
         		ZDSL="$!{rowjqm.ZDSL}" WLDW01="$!{rowjqm.WLDW01}" DWMC="$!{rowjqm.DWMC}" BM01="$!{rowjqm.BM01}" CK01="$!{rowjqm.CK01}" CKMC="$!{rowjqm.CKMC}" SMSL="$!{rowjqm.SMSL}" CMKC="$!{rowjqm.CMKC}" CKGSXX="$!{rowjqm.CKGSXX}">
           <JQMMX>
           #foreach ($rowjqmmx in $rowjqm.rowjqmmxs)
-            <ROWJQMMX JLID="$!{rowjqmmx.JLID}" JQM01="$!{rowjqmmx.JQM01}" GSXX01="$!{rowjqmmx.GSXX01}" XH="$!{rowjqmmx.XH}" CSJQM01="$!{rowjqmmx.CSJQM01}" TIME02="$!{rowjqmmx.TIME02}"/>
+          #set ($temp=$rowjqmmx)
+            <ROWJQMMX JLID="$!{temp.JLID}" JQM01="$!{temp.JQM01}" GSXX01="$!{temp.GSXX01}" XH="$!{temp.XH}" CSJQM01="$!{temp.CSJQM01}" TIME02="$!{temp.TIME02}"/>
           #end
           </JQMMX>
         </ROWJQM>
