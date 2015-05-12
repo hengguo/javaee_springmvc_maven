@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>springmvc_demo</groupId>
+	<groupId>demo</groupId>
 	<artifactId>springmvc_demo</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>springmvc_demo Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
@@ -16,6 +16,16 @@
 		<cxf.version>2.5.8</cxf.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.2.0.Final</version>
+		</dependency>
 		<!-- http -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>

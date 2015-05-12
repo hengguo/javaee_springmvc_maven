@@ -71,4 +71,8 @@ public class AESAPPUtils {
         }
     }
     
+    public static void main(String[] args) {
+        System.out.println(decryptAES(encryptAES("1A23")));
+    }
+    
 }
